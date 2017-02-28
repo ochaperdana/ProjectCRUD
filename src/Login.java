@@ -133,7 +133,7 @@ public class Login extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Anda berhasil SignUp!");
         } catch (Exception t) {
-            JOptionPane.showMessageDialog(null, "Silakan ulangi lagi prosedur");
+            JOptionPane.showMessageDialog(null, "Silakan ulangi lagi prosedur!");
         }
     }//GEN-LAST:event_buttonSignUpActionPerformed
 
