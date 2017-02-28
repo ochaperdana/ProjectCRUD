@@ -416,11 +416,9 @@ public class frmMain extends javax.swing.JFrame {
             else{
                 JK="P";
             }
-            String SQL="UPDATE t_siswa SET"+
-                    "WHERE NamaSiswa='"+tfNama.getText()+"',"+"WHERE JenisKelamin='"+JK+"',"+
-                    "WHERE Kelas='"+tfKelas.getText()+"',"+"WHERE Email='"+tfEmail.getText()+"'"+
-                    "WHERE Alamat='"+taAlamat.getText()+"'"+
-                    "WHERE NIS='"+tfNIS.getText()+"'";
+            int baris=jTable1.getSelectedRow();
+            String NIS=jTable1.getValueAt(baris, 0).toString();
+            String SQL="UPDATE `t_siswa` SET `NamaSiswa`='"+tfNama.getText()+"',`JenisKelamin`='"+JK+"',`Kelas`='"+tfKelas.getText()+"',`Email`='"+tfEmail.getText()+"',`Alamat`='"+taAlamat.getText()+"' WHERE NIS='"+NIS+"'";
             int status=KoneksiDB.execute(SQL);
             if (status==1) {
                 JOptionPane.showMessageDialog(this, "Data berhasil diperbarui","Sukses",JOptionPane.INFORMATION_MESSAGE);
