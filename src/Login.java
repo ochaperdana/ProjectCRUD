@@ -39,9 +39,9 @@ public class Login extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        buttonSignIn = new javax.swing.JButton();
+        buttonSignUp = new javax.swing.JButton();
+        buttonExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -59,54 +59,49 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jTextField2);
         jTextField2.setBounds(110, 70, 170, 30);
 
-        jButton1.setText("Sign Up");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonSignIn.setBackground(new java.awt.Color(102, 102, 255));
+        buttonSignIn.setText("Sign In");
+        buttonSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonSignInActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(260, 220, 73, 23);
+        getContentPane().add(buttonSignIn);
+        buttonSignIn.setBounds(260, 220, 73, 23);
 
-        jButton2.setText("Sign In");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonSignUp.setBackground(new java.awt.Color(102, 255, 102));
+        buttonSignUp.setText("Sign Up");
+        buttonSignUp.setActionCommand("Sign Up");
+        buttonSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonSignUpActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(50, 220, 65, 23);
+        getContentPane().add(buttonSignUp);
+        buttonSignUp.setBounds(50, 220, 80, 23);
 
-        jButton3.setText("Exit");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(160, 220, 73, 23);
+        buttonExit.setBackground(new java.awt.Color(204, 0, 0));
+        buttonExit.setText("Exit");
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonExit);
+        buttonExit.setBounds(160, 220, 73, 23);
 
         setBounds(0, 0, 416, 339);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String username=jTextField1.getText();
-        String password=jTextField2.getText();
-        
-        try {
-            try(Statement statement=(Statement) file_koneksi.GetConnection().createStatement()){
-                statement.executeUpdate("INSERT INTO tb_akun(username, password) VALUES('"+username+"','"+password+"');");
-            }
-            JOptionPane.showMessageDialog(null, "Anda berhasil SignUp");
-        } catch (Exception t) {
-        }JOptionPane.showMessageDialog(null, "Ulangi prosedur");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSignInActionPerformed
         // TODO add your handling code here:
         Connection connection;
         PreparedStatement ps;
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_testkoneksi?zeroDateTimeBehavior=convertToNull", "root", "");
-            ps = connection.prepareStatement("SELECT username, password FROM tb_akun WHERE username = ? AND password = ?");
-            ps.setString(1, jTextField1.getText());
-           ps.setString(2, jTextField2.getText());
+            ps = connection.prepareStatement("SELECT * FROM tb_akun WHERE username = ? AND password = ?");
+            ps.setString(1, jTextField2.getText());
+            ps.setString(2, jTextField1.getText());
             ResultSet result = ps.executeQuery();
             if(result.next()){
                 new frmMain().show();
@@ -114,13 +109,33 @@ public class Login extends javax.swing.JFrame {
             }
             else {
                 JOptionPane.showMessageDialog(rootPane, "Salah!");
-                jTextField1.setText("");
-                jTextField2.requestFocus();
+                jTextField2.setText("");
+                jTextField1.requestFocus();
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "gagal");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonSignInActionPerformed
+
+    private void buttonSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSignUpActionPerformed
+        // TODO add your handling code here:
+        String username=jTextField2.getText();
+        String password=jTextField1.getText();
+        
+        try {
+            try (Statement statement=(Statement) file_koneksi.GetConnection().createStatement()){
+                statement.executeUpdate("INSERT INTO tb_akun(username, password) VALUES ('"+username+"','"+password+"');");
+            }
+            JOptionPane.showMessageDialog(null, "Anda berhasil SignUp!");
+        } catch (Exception t) {
+            JOptionPane.showMessageDialog(null, "Silakan ulangi lagi prosedur");
+        }
+    }//GEN-LAST:event_buttonSignUpActionPerformed
+
+    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,9 +173,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buttonExit;
+    private javax.swing.JButton buttonSignIn;
+    private javax.swing.JButton buttonSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
