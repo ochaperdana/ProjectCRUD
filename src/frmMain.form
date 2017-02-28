@@ -237,11 +237,17 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbLaki">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroup1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="LAKI-LAKI"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbPerempuan">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroup1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PEREMPUAN"/>
               </Properties>
             </Component>

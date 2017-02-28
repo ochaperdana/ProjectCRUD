@@ -104,8 +104,10 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel5.setText("JENIS KELAMIN");
 
+        buttonGroup1.add(rbLaki);
         rbLaki.setText("LAKI-LAKI");
 
+        buttonGroup1.add(rbPerempuan);
         rbPerempuan.setText("PEREMPUAN");
 
         jLabel6.setText("EMAIL");
