@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         buttonSignIn = new javax.swing.JButton();
         buttonSignUp = new javax.swing.JButton();
         buttonExit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -67,7 +68,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSignIn);
-        buttonSignIn.setBounds(260, 220, 73, 23);
+        buttonSignIn.setBounds(260, 203, 73, 40);
 
         buttonSignUp.setBackground(new java.awt.Color(102, 255, 102));
         buttonSignUp.setText("Sign Up");
@@ -78,7 +79,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSignUp);
-        buttonSignUp.setBounds(50, 220, 80, 23);
+        buttonSignUp.setBounds(50, 203, 80, 40);
 
         buttonExit.setBackground(new java.awt.Color(204, 0, 0));
         buttonExit.setText("Exit");
@@ -88,7 +89,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonExit);
-        buttonExit.setBounds(160, 220, 73, 23);
+        buttonExit.setBounds(160, 203, 73, 40);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 400, 300);
 
         setBounds(0, 0, 416, 339);
     }// </editor-fold>//GEN-END:initComponents
@@ -124,7 +129,7 @@ public class Login extends javax.swing.JFrame {
         
         try {
             try (Statement statement=(Statement) file_koneksi.GetConnection().createStatement()){
-                statement.executeUpdate("INSERT INTO tb_akun(username, password) VALUES ('"+username+"','"+password+"');");
+                statement.executeUpdate("INSERT INTO `tb_akun`(`username`, `password`) VALUES ('"+username+"', '"+password+"')");
             }
             JOptionPane.showMessageDialog(null, "Anda berhasil SignUp!");
         } catch (Exception t) {
@@ -178,6 +183,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton buttonSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

@@ -19,7 +19,7 @@ public class file_koneksi {
     public static Connection GetConnection() throws SQLException{
         if (koneksi==null) {
             Driver driver=new Driver();
-            koneksi=(Connection) DriverManager.getConnection("jdbc:mysql//localhost:3306/db_testkoneksi?zeroDateTimeBehavior=convertToNull","root","");
+            koneksi=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db_testkoneksi?zeroDateTimeBehavior=convertToNull","root","");
         }
         return koneksi;
     }
