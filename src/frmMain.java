@@ -8,9 +8,16 @@
  *
  * @author Smktelkom
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmMain extends javax.swing.JFrame {
@@ -20,6 +27,8 @@ public class frmMain extends javax.swing.JFrame {
      */
     public frmMain() {
         initComponents();
+        setTanggal();
+        setJam();
     }
 
     /**
@@ -36,6 +45,8 @@ public class frmMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Date = new javax.swing.JLabel();
+        Time = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         tfNIS = new javax.swing.JTextField();
@@ -51,12 +62,17 @@ public class frmMain extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAlamat = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        tfTmpLahir = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -75,6 +91,10 @@ public class frmMain extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         jLabel2.setText("ATTITUDE IS EVERYTHING");
 
+        Date.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
+
+        Time.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -82,17 +102,27 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Date, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(Time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(155, 155, 155))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(Date, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -120,6 +150,10 @@ public class frmMain extends javax.swing.JFrame {
         taAlamat.setRows(5);
         jScrollPane1.setViewportView(taAlamat);
 
+        jLabel10.setText("TEMPAT LAHIR");
+
+        jLabel11.setText("TANGGAL LAHIR");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -131,6 +165,7 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(tfNama)
                     .addComponent(tfKelas)
                     .addComponent(tfEmail)
+                    .addComponent(tfTmpLahir)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbPerempuan)
@@ -141,8 +176,11 @@ public class frmMain extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 107, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 107, Short.MAX_VALUE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -167,14 +205,22 @@ public class frmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfTmpLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
                 .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 0));
@@ -214,6 +260,13 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("PRINT");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -229,6 +282,8 @@ public class frmMain extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -240,7 +295,8 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 
@@ -248,17 +304,17 @@ public class frmMain extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIS", "NAMA", "JENIS KELAMIN", "KELAS", "EMAIL", "ALAMAT"
+                "NIS", "NAMA", "JENIS KELAMIN", "KELAS", "TEMPAT LAHIR", "TANGGAL LAHIR", "EMAIL", "ALAMAT"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -317,14 +373,14 @@ public class frmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,12 +394,14 @@ public class frmMain extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 1009, 651);
+        setBounds(0, 0, 1009, 780);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if ("".equals(tfNIS.getText())||"".equals(taAlamat.getText())||"".equals(tfKelas.getText())||"".equals(tfNama.getText())||"".equals(tfEmail.getText())) {
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String tanggal=dateFormat.format(jDateChooser1.getDate());
+        if ("".equals(tfNIS.getText())||"".equals(taAlamat.getText())||"".equals(tfKelas.getText())||"".equals(tfNama.getText())||"".equals(tfEmail.getText())||"".equals(tfTmpLahir.getText())||"".equals(tanggal)) {
             JOptionPane.showMessageDialog(this, "Harap lengkapi data Anda","Error", JOptionPane.WARNING_MESSAGE);
             
         }
@@ -355,8 +413,8 @@ public class frmMain extends javax.swing.JFrame {
             else{
                 JK="P";
             }
-            String SQL="INSERT INTO t_siswa(NIS,NamaSiswa,JenisKelamin,Kelas,Email,Alamat)"+
-                    "VALUES('"+tfNIS.getText()+"','"+tfNama.getText()+"','"+JK+"','"+tfKelas.getText()+"','"+tfEmail.getText()+"','"+taAlamat.getText()+"')";
+            String SQL="INSERT INTO t_siswa(NIS,NamaSiswa,JenisKelamin,Kelas,TempatLahir,TglLahir,Email,Alamat)"+
+                    "VALUES('"+tfNIS.getText()+"','"+tfNama.getText()+"','"+JK+"','"+tfKelas.getText()+"','"+tfTmpLahir.getText()+"','"+tanggal+"','"+tfEmail.getText()+"','"+taAlamat.getText()+"')";
             int status=KoneksiDB.execute(SQL);
             if (status==1) {
                 JOptionPane.showMessageDialog(this, "Data berhasil disimpan","Sukses",JOptionPane.INFORMATION_MESSAGE);
@@ -448,8 +506,50 @@ public class frmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        MessageFormat header=new MessageFormat("Biodata siswa SMK Telkom Malang");
+        MessageFormat footer=new MessageFormat("Page (0,number,integer)");
+        try {
+            jTable1.print(JTable.PrintMode.FIT_WIDTH,header,footer,true,null,true,null);
+        } catch (java.awt.print.PrinterException e) {
+            System.err.format("Cannot print %s%n", e.getMessage());
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public void setTanggal(){
+        java.util.Date now=new java.util.Date();
+        java.text.SimpleDateFormat cal=new java.text.SimpleDateFormat("dd/MM/yyyy");
+        Date.setText(cal.format(now));
+    }
+    public void setJam(){
+        ActionListener taskPerformer=new ActionListener(){
+            String nol_hour,nol_minute,nol_sec;
+            public void actionPerformed(ActionEvent evt){
+                Date dt=new Date();
+                int hour=dt.getHours();
+                int minute=dt.getMinutes();
+                int sec=dt.getSeconds();
+                if (hour<=9) {
+                    nol_hour="0";
+                }
+                if(minute<=9){
+                    nol_minute="0";
+                }
+                if(sec<=9){
+                    nol_sec="0";
+                }
+                String jam=Integer.toString(hour);
+                String menit=Integer.toString(minute);
+                String detik=Integer.toString(sec);
+                Time.setText(jam+":"+menit+":"+detik);
+            }
+
+        };
+        new Timer(100, taskPerformer).start();
+    }
     public void selectData(){
-        String kolom[]={"NIS","NamaSiswa","JenisKelamin","Kelas","Email","Alamat"};
+        String kolom[]={"NIS","NamaSiswa","JenisKelamin","Kelas","TempatLahir","TglLahir","Email","Alamat"};
         DefaultTableModel dtm=new DefaultTableModel(null, kolom);
         String SQL="SELECT * FROM t_siswa";
         ResultSet rs=KoneksiDB.executeQuery(SQL);
@@ -466,9 +566,11 @@ public class frmMain extends javax.swing.JFrame {
                         JenisKelamin="Perempuan";
                             }
                 String Kelas=rs.getString(4);
-                String Email=rs.getString(5);
-                String Alamat=rs.getString(6);
-                String data[]={NIS,NamaSiswa,JenisKelamin,Kelas,Email,Alamat};
+                String TempatLahir=rs.getString(5);
+                String TglLahir=rs.getString(6);
+                String Email=rs.getString(7);
+                String Alamat=rs.getString(8);
+                String data[]={NIS,NamaSiswa,JenisKelamin,Kelas,TempatLahir,TglLahir,Email,Alamat};
                 dtm.addRow(data);
             }
         } catch (SQLException ex) {
@@ -513,13 +615,19 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Date;
+    private javax.swing.JLabel Time;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -543,6 +651,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JTextField tfKelas;
     private javax.swing.JTextField tfNIS;
     private javax.swing.JTextField tfNama;
+    private javax.swing.JTextField tfTmpLahir;
     // End of variables declaration//GEN-END:variables
 
     
