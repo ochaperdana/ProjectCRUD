@@ -35,3 +35,14 @@ jika salah maka akan ditampilkan alert yang menyatakan bahwa inputan user salah.
 [![Screenshot (254).png](https://s17.postimg.org/ahgi2qjen/Screenshot_254.png)](https://postimg.org/image/tzb5iogcb/)
 <br/><h5>Gambar di atas merupakan tampilan ketika user menginputkan username dan password baru yang ketika user kemudian mengklik tombol 
 Sign Up maka username dan password baru tersebut akan dimasukkan ke database yang sudah ada dengan query Insert (hasilnya pada gambar 2).</h5>
+[![Screenshot (256).png](https://s30.postimg.org/uvqvqkb1t/Screenshot_256.png)](https://postimg.org/image/fzsciyzn1/)
+<br/><h5>Pada gambar di atas, terdapat dua buah label untuk menampilkan jam dan tanggal saat ini dengan memanfaatkan package Date dan Time.</h5>
+[![Screenshot (257).png](https://s9.postimg.org/655ajfman/Screenshot_257.png)](https://postimg.org/image/l13tr0xp7/)
+[![Screenshot (259).png](https://s3.postimg.org/52cq2658j/Screenshot_259.png)](https://postimg.org/image/y4r04zri7/)
+<br/><h5>Gambar di atas merupakan tampilan setelah project dimodifikasi dengan menambahkan jDateChooser yang berfungsi untuk menambahkan inputan berupa tanggal, bulan dan tahun dengan format tertentu yang dapat ditentukan oleh pembuat. Pada gambar selanjutnya, merupakan hasil inputan user dengan tanggal yang dipilih dapat ditampilkan.</h5>
+[![Screenshot (261).png](https://s3.postimg.org/qjbjcdac3/Screenshot_261.png)](https://postimg.org/image/o1zs53qfj/)
+[![Screenshot (262).png](https://s3.postimg.org/kxsctw3df/Screenshot_262.png)](https://postimg.org/image/v7urt4t8v/)
+[![Screenshot (263).png](https://s21.postimg.org/5026et2qv/Screenshot_263.png)](https://postimg.org/image/vxw3gjndv/)
+[![Screenshot (264).png](https://s23.postimg.org/oh8t2se3f/Screenshot_264.png)](https://postimg.org/image/lzx1viu6v/)
+<br/><h5>Pada gambar-gambar di atas terlihat langkah-langkah yang akan muncul ketika button Print diklik. Button Print akan menjalankan perintah untuk mengekspor data yang telah ada pada tabel menjadi sebuah file berformat pdf, dsb. yang dapat disimpan ke PC user. Perintah ini menggunakan library itextsharp yang mendukung proses ekspor data ke dalam bentuk pdf.</h5>
+
