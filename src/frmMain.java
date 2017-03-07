@@ -542,7 +542,7 @@ public class frmMain extends javax.swing.JFrame {
                 String jam=Integer.toString(hour);
                 String menit=Integer.toString(minute);
                 String detik=Integer.toString(sec);
-                Time.setText(jam+":"+menit+":"+detik);
+                Time.setText(jam+" : "+menit+" : "+detik);
             }
 
         };
